@@ -48,8 +48,15 @@ if (menuToggle && navigation) {
     });
 
     // Close menu when Escape key is pressed
-    document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
+    
+// Close menu when Escape key is pressed
+document.addEventListener("keydown", function (event) {
+
+    // Close the menu only if it is open
+    if (
+        event.key === "Escape" &&
+        navigation.classList.contains("active")
+    ) {
         navigation.classList.remove("active");
 
         menuToggle.setAttribute("aria-expanded", "false");
@@ -57,8 +64,12 @@ if (menuToggle && navigation) {
             "aria-label",
             "Open navigation menu"
         );
+
+        // Return keyboard focus to the menu button
+        menuToggle.focus();
     }
 });
+
 
     // Close mobile menu when switching to desktop width
     window.addEventListener("resize", function () {
